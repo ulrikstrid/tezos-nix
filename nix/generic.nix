@@ -12,8 +12,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_stdlib" ];
+      src = ./../src;
+      dirs = [ "lib_stdlib" ];
     };
 
     useDune2 = true;
@@ -43,8 +43,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_stdlib" ];
+      src = ./../src;
+      dirs = [ "lib_stdlib" ];
     };
 
     useDune2 = true;
@@ -73,8 +73,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_crypto" ];
+      src = ./../src;
+      dirs = [ "lib_clic" ];
     };
 
     useDune2 = true;
@@ -100,8 +100,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_crypto" ];
+      src = ./../src;
+      dirs = [ "lib_crypto" ];
     };
 
     useDune2 = true;
@@ -119,6 +119,9 @@ rec {
       zarith
       secp256k1-internal
       ringo
+      tezos-test-helpers
+      bisect_ppx
+      ppx_tools_versioned
     ];
 
     checkInputs = [
@@ -126,6 +129,7 @@ rec {
       bls12-381-unix
       alcotest
       alcotest-lwt
+      tezos-test-helpers
     ];
 
     inherit doCheck;
@@ -136,8 +140,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_hacl_glue/virtual" ];
+      src = ./../src;
+      dirs = [ "lib_hacl_glue/virtual" ];
     };
 
     useDune2 = true;
@@ -150,8 +154,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_hacl_glue/unix" ];
+      src = ./../src;
+      dirs = [ "lib_hacl_glue/unix" ];
     };
 
     useDune2 = true;
@@ -169,8 +173,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_hacl_glue/js" ];
+      src = ./../src;
+      dirs = [ "lib_hacl_glue/js" ];
     };
 
     useDune2 = true;
@@ -184,8 +188,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_hacl_glue/js" ];
+      src = ./../src;
+      dirs = [ "lib_hacl_glue/js" ];
     };
 
     useDune2 = true;
@@ -208,8 +212,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_error_monad" ];
+      src = ./../src;
+      dirs = [ "lib_error_monad" ];
     };
 
     useDune2 = true;
@@ -235,8 +239,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_event_logging" ];
+      src = ./../src;
+      dirs = [ "lib_event_logging" ];
     };
 
     useDune2 = true;
@@ -258,8 +262,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_micheline" ];
+      src = ./../src;
+      dirs = [ "lib_micheline" ];
     };
 
     useDune2 = true;
@@ -284,8 +288,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_benchmark/lib_micheline_rewriting" ];
+      src = ./../src;
+      dirs = [ "lib_benchmark/lib_micheline_rewriting" ];
     };
 
     useDune2 = true;
@@ -312,8 +316,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_alpha/lib_benchmark/lib_benchmark_type_inference" ];
+      src = ./../src;
+      dirs = [ "proto_alpha/lib_benchmark/lib_benchmark_type_inference" ];
     };
 
     useDune2 = true;
@@ -340,8 +344,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_alpha/lib_plugin" ];
+      src = ./../src;
+      dirs = [ "proto_alpha/lib_plugin" ];
     };
 
     useDune2 = true;
@@ -363,8 +367,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/bin_validation" ];
+      src = ./../src;
+      dirs = [ "bin_validation" ];
     };
 
     useDune2 = true;
@@ -389,8 +393,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_validation" ];
+      src = ./../src;
+      dirs = [ "lib_validation" ];
     };
 
     useDune2 = true;
@@ -411,8 +415,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_shell" ];
+      src = ./../src;
+      dirs = [ "lib_shell" ];
     };
 
     useDune2 = true;
@@ -452,8 +456,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_rpc" ];
+      src = ./../src;
+      dirs = [ "lib_rpc" ];
     };
 
     useDune2 = true;
@@ -478,8 +482,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_rpc_http" ];
+      src = ./../src;
+      dirs = [ "lib_rpc_http" ];
     };
 
     useDune2 = true;
@@ -499,8 +503,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_rpc_http" ];
+      src = ./../src;
+      dirs = [ "lib_rpc_http" ];
     };
 
     useDune2 = true;
@@ -520,8 +524,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_rpc_http" ];
+      src = ./../src;
+      dirs = [ "lib_rpc_http" ];
     };
 
     useDune2 = true;
@@ -540,8 +544,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_rpc_http" ];
+      src = ./../src;
+      dirs = [ "lib_rpc_http" ];
     };
 
     useDune2 = true;
@@ -562,8 +566,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_signer_services" ];
+      src = ./../src;
+      dirs = [ "lib_signer_services" ];
     };
 
     useDune2 = true;
@@ -582,8 +586,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_base" ];
+      src = ./../src;
+      dirs = [ "lib_base" ];
     };
 
     useDune2 = true;
@@ -600,6 +604,8 @@ rec {
       ptime
       ezjsonm
       ipaddr
+      tezos-hacl-glue-unix
+      bls12-381-unix
     ];
 
     checkInputs = [
@@ -615,8 +621,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_base/unix" ];
+      src = ./../src;
+      dirs = [ "lib_base/unix" ];
     };
 
     useDune2 = true;
@@ -648,8 +654,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_test" ];
+      src = ./../src;
+      dirs = [ "lib_test" ];
     };
 
     useDune2 = true;
@@ -668,8 +674,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_lwt_result_stdlib" ];
+      src = ./../src;
+      dirs = [ "lib_lwt_result_stdlib" ];
     };
 
     useDune2 = true;
@@ -693,8 +699,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_alpha/lib_protocol" ];
+      src = ./../src;
+      dirs = [ "proto_alpha/lib_protocol" ];
     };
 
     useDune2 = true;
@@ -720,14 +726,38 @@ rec {
 
     inherit doCheck;
   };
+  /*
+    bls12-381 = buildDunePackage {
+    pname = "bls12-381";
+    version = version;
+
+    src = lib.filterGitSource {
+    src = ./../src;
+    dirs = [ "vendors/ocaml-bls12-381" ];
+    };
+
+    useDune2 = true;
+
+    propagatedBuildInputs = [
+    ff
+    dune-configurator
+    zarith
+    ctypes
+    pkgs.rustc
+    pkgs.cargo
+    ];
+
+    inherit doCheck;
+    };
+  */
 
   tezos-protocol-alpha = buildDunePackage {
     pname = "tezos-protocol-alpha";
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_alpha/lib_protocol" ];
+      src = ./../src;
+      dirs = [ "proto_alpha/lib_protocol" ];
     };
 
     useDune2 = true;
@@ -744,8 +774,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_alpha/lib_protocol/test/helpers" ];
+      src = ./../src;
+      dirs = [ "proto_alpha/lib_protocol/test/helpers" ];
     };
 
     useDune2 = true;
@@ -769,8 +799,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_alpha/lib_parameters" ];
+      src = ./../src;
+      dirs = [ "proto_alpha/lib_parameters" ];
     };
 
     useDune2 = true;
@@ -789,8 +819,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_protocol_environment" ];
+      src = ./../src;
+      dirs = [ "lib_protocol_environment" ];
     };
 
     useDune2 = true;
@@ -809,8 +839,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_protocol_environment" ];
+      src = ./../src;
+      dirs = [ "lib_protocol_environment" ];
     };
 
     useDune2 = true;
@@ -828,8 +858,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_protocol_environment" ];
+      src = ./../src;
+      dirs = [ "lib_protocol_environment" ];
     };
 
     useDune2 = true;
@@ -842,8 +872,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_context" ];
+      src = ./../src;
+      dirs = [ "lib_context" ];
     };
 
     useDune2 = true;
@@ -875,8 +905,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_context" ];
+      src = ./../src;
+      dirs = [ "lib_context" ];
     };
 
     useDune2 = true;
@@ -897,8 +927,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_protocol_environment" ];
+      src = ./../src;
+      dirs = [ "lib_protocol_environment" ];
     };
 
     useDune2 = true;
@@ -917,8 +947,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/bin_node" ];
+      src = ./../src;
+      dirs = [ "bin_node" ];
     };
 
     useDune2 = true;
@@ -959,8 +989,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/bin_client" ];
+      src = ./../src;
+      dirs = [ "bin_client" ];
     };
 
     useDune2 = true;
@@ -993,8 +1023,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_client_commands" ];
+      src = ./../src;
+      dirs = [ "lib_client_commands" ];
     };
 
     useDune2 = true;
@@ -1022,8 +1052,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_genesis/lib_protocol" ];
+      src = ./../src;
+      dirs = [ "proto_genesis/lib_protocol" ];
     };
 
     useDune2 = true;
@@ -1040,8 +1070,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_genesis/lib_client" ];
+      src = ./../src;
+      dirs = [ "proto_genesis/lib_client" ];
     };
 
     useDune2 = true;
@@ -1064,8 +1094,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_genesis_carthagenet/lib_protocol" ];
+      src = ./../src;
+      dirs = [ "proto_genesis_carthagenet/lib_protocol" ];
     };
 
     useDune2 = true;
@@ -1082,8 +1112,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_genesis_carthagenet/lib_client" ];
+      src = ./../src;
+      dirs = [ "proto_genesis_carthagenet/lib_client" ];
     };
 
     useDune2 = true;
@@ -1105,8 +1135,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_client_base" ];
+      src = ./../src;
+      dirs = [ "lib_client_base" ];
     };
 
     useDune2 = true;
@@ -1133,8 +1163,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_client_base_unix" ];
+      src = ./../src;
+      dirs = [ "lib_client_base_unix" ];
     };
 
     useDune2 = true;
@@ -1157,8 +1187,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_sapling" ];
+      src = ./../src;
+      dirs = [ "lib_sapling" ];
     };
 
     useDune2 = true;
@@ -1196,8 +1226,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_shell_services" ];
+      src = ./../src;
+      dirs = [ "lib_shell_services" ];
     };
 
     useDune2 = true;
@@ -1217,8 +1247,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_workers" ];
+      src = ./../src;
+      dirs = [ "lib_workers" ];
     };
 
     useDune2 = true;
@@ -1237,8 +1267,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_p2p" ];
+      src = ./../src;
+      dirs = [ "lib_p2p" ];
     };
 
     useDune2 = true;
@@ -1268,8 +1298,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_p2p_services" ];
+      src = ./../src;
+      dirs = [ "lib_p2p_services" ];
     };
 
     useDune2 = true;
@@ -1286,8 +1316,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_version" ];
+      src = ./../src;
+      dirs = [ "lib_version" ];
     };
 
     useDune2 = true;
@@ -1304,8 +1334,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_mockup" ];
+      src = ./../src;
+      dirs = [ "lib_mockup" ];
     };
 
     useDune2 = true;
@@ -1335,8 +1365,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_mockup" ];
+      src = ./../src;
+      dirs = [ "lib_mockup" ];
     };
 
     useDune2 = true;
@@ -1362,8 +1392,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_mockup_proxy" ];
+      src = ./../src;
+      dirs = [ "lib_mockup_proxy" ];
     };
 
     useDune2 = true;
@@ -1386,8 +1416,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_mockup" ];
+      src = ./../src;
+      dirs = [ "lib_mockup" ];
     };
 
     useDune2 = true;
@@ -1408,8 +1438,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_signer_backends" ];
+      src = ./../src;
+      dirs = [ "lib_signer_backends" ];
     };
 
     useDune2 = true;
@@ -1437,8 +1467,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_test_services" ];
+      src = ./../src;
+      dirs = [ "lib_test_services" ];
     };
 
     useDune2 = true;
@@ -1455,13 +1485,32 @@ rec {
     inherit doCheck;
   };
 
+  tezos-test-helpers = buildDunePackage {
+    pname = "tezos-test-helpers";
+    version = version;
+
+    src = lib.filterGitSource {
+      src = ./../src;
+      dirs = [ "./src/lib_test" ];
+    };
+
+    useDune2 = true;
+
+    propagatedBuildInputs = [
+      alcotest
+      alcotest-lwt
+      qcheck
+      qcheck-alcotest
+    ];
+  };
+
   tezos-requester = buildDunePackage {
     pname = "tezos-requester";
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_requester" ];
+      src = ./../src;
+      dirs = [ "lib_requester" ];
     };
 
     useDune2 = true;
@@ -1486,8 +1535,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_store/legacy" ];
+      src = ./../src;
+      dirs = [ "lib_store/legacy" ];
     };
 
     useDune2 = true;
@@ -1518,8 +1567,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_store" ];
+      src = ./../src;
+      dirs = [ "lib_store" ];
     };
 
     useDune2 = true;
@@ -1551,8 +1600,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/protocol_updater" ];
+      src = ./../src;
+      dirs = [ "protocol_updater" ];
     };
 
     useDune2 = true;
@@ -1576,8 +1625,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/protocol_compiler" ];
+      src = ./../src;
+      dirs = [ "protocol_compiler" ];
     };
 
     useDune2 = true;
@@ -1605,7 +1654,7 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
+      src = ./../src;
       dirs = [ "vendors/ocaml-lmdb" ];
     };
 
@@ -1630,8 +1679,8 @@ rec {
       version = version;
 
       src = lib.filterGitSource {
-        src = ./..;
-        dirs = [ "src/bin_snoop" ];
+        src = ./../src;
+        dirs = [ "bin_snoop" ];
       };
 
       useDune2 = true;
@@ -1658,7 +1707,7 @@ rec {
     version = "1.0";
 
     src = lib.filterGitSource {
-      src = ./..;
+      src = ./../src;
       dirs = [ "vendors/numerics" ];
     };
 
@@ -1676,7 +1725,7 @@ rec {
     version = "1.0";
 
     src = lib.filterGitSource {
-      src = ./..;
+      src = ./../src;
       dirs = [ "vendors/statz" ];
     };
 
@@ -1690,7 +1739,7 @@ rec {
     version = "1.0";
 
     src = lib.filterGitSource {
-      src = ./..;
+      src = ./../src;
       dirs = [ "vendors/benchmark-utils" ];
     };
 
@@ -1704,7 +1753,7 @@ rec {
     version = "1.0";
 
     src = lib.filterGitSource {
-      src = ./..;
+      src = ./../src;
       dirs = [ "vendors/pyml-plot" ];
     };
 
@@ -1722,8 +1771,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_benchmark" ];
+      src = ./../src;
+      dirs = [ "lib_benchmark" ];
     };
 
     useDune2 = true;
@@ -1751,8 +1800,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/proto_alpha/lib_benchmarks_proto" ];
+      src = ./../src;
+      dirs = [ "proto_alpha/lib_benchmarks_proto" ];
     };
 
     useDune2 = true;
@@ -1778,8 +1827,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_benchmark" ];
+      src = ./../src;
+      dirs = [ "lib_benchmark" ];
     };
 
     useDune2 = true;
@@ -1800,8 +1849,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/src/proto_alpha/lib_benchmark" ];
+      src = ./../src;
+      dirs = [ "src/proto_alpha/lib_benchmark" ];
     };
 
     useDune2 = true;
@@ -1836,8 +1885,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_benchmarks_proto" ];
+      src = ./../src;
+      dirs = [ "lib_benchmarks_proto" ];
     };
 
     useDune2 = true;
@@ -1867,8 +1916,8 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
-      dirs = [ "src/lib_shell_benchmarks" ];
+      src = ./../src;
+      dirs = [ "lib_shell_benchmarks" ];
     };
 
     useDune2 = true;
@@ -1929,7 +1978,7 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
+      src = ./../src;
       dirs = [ "vendors/ocaml-ledger-wallet" ];
     };
 
@@ -1949,7 +1998,7 @@ rec {
     version = version;
 
     src = lib.filterGitSource {
-      src = ./..;
+      src = ./../src;
       dirs = [ "vendors/ocaml-ledger-wallet" ];
     };
 

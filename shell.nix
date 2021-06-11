@@ -18,7 +18,7 @@ with pkgs;
 
 (mkShell {
   inputsFrom = lib.attrValues tezosDrvs;
-  buildInputs = with ocamlPackages; [ utop ocaml-lsp odoc watchexec ];
+  buildInputs = with ocamlPackages; [ utop fswatch redemon ppx_let_locs lsp jsonrpc ocaml-lsp odoc ];
 }).overrideAttrs (o: {
   propagatedBuildInputs = filterDrvs o.propagatedBuildInputs;
   buildInputs = filterDrvs o.buildInputs;

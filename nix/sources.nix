@@ -2,7 +2,7 @@
 let
   overlays =
     builtins.fetchTarball
-      https://github.com/anmonteiro/nix-overlays/archive/bc48be2191fe97dfab2a17e846b2c3a9013f55c7.tar.gz;
+      https://github.com/anmonteiro/nix-overlays/archive/ac81548033900c561b765da10bd81ccbd0d1eee5.tar.gz;
 
 in
 import "${overlays}/sources.nix" {
@@ -10,11 +10,7 @@ import "${overlays}/sources.nix" {
     (import overlays)
     (self: super: {
       ocamlPackages =
-        (super.ocaml-ng."ocamlPackages_${ocamlVersion}" //
-          {
-            ocaml-migrate-parsetree = super.ocaml-ng."ocamlPackages_${ocamlVersion}".ocaml-migrate-parsetree-2-1;
-            ocaml-migrate-parsetree-1-8 = super.ocaml-ng."ocamlPackages_${ocamlVersion}".ocaml-migrate-parsetree-2-1;
-          });
+        (super.ocaml-ng."ocamlPackages_${ocamlVersion}");
 
       pkgsCross.musl64.pkgsStatic = super.pkgsCross.musl64.pkgsStatic.appendOverlays [
         (self: super: {
