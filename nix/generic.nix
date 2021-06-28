@@ -726,30 +726,30 @@ rec {
 
     inherit doCheck;
   };
-  /*
-    bls12-381 = buildDunePackage {
+
+  bls12-381 = buildDunePackage {
     pname = "bls12-381";
     version = version;
 
     src = lib.filterGitSource {
-    src = ./../src;
-    dirs = [ "vendors/ocaml-bls12-381" ];
+      src = ./../src;
+      dirs = [ "vendors/ocaml-bls12-381" ];
     };
 
     useDune2 = true;
 
     propagatedBuildInputs = [
-    ff
-    dune-configurator
-    zarith
-    ctypes
-    pkgs.rustc
-    pkgs.cargo
+      ff
+      dune-configurator
+      zarith
+      ctypes
+      pkgs.rustc
+      pkgs.cargo
     ];
 
     inherit doCheck;
-    };
-  */
+  };
+
 
   tezos-protocol-alpha = buildDunePackage {
     pname = "tezos-protocol-alpha";
