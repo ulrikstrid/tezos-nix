@@ -1,4 +1,4 @@
-{ pkgs, stdenv, lib, ocamlPackages, static ? false, doCheck }:
+{ pkgs, stdenv, lib, ocamlPackages, static ? false, opaline, doCheck }:
 
 with ocamlPackages;
 
@@ -727,29 +727,115 @@ rec {
     inherit doCheck;
   };
 
+/*
   bls12-381 = buildDunePackage {
     pname = "bls12-381";
-    version = version;
+    inherit (bls12-381-gen) version external src useDune2;
 
-    src = lib.filterGitSource {
-      src = ./../src;
-      dirs = [ "vendors/ocaml-bls12-381" ];
+    propagatedBuildInputs = [
+      ff
+      zarith
+      ctypes
+      bls12-381-gen
+    ];
+
+    buildInputs = [
+      dune-configurator
+    ];
+
+    inherit doCheck;
+  };
+
+  bls12-381-gen = buildDunePackage {
+    pname = "bls12-381-gen";
+    version = "0.5-dev";
+    external = true;
+
+    src = builtins.fetchurl {
+      url = https://gitlab.com/dannywillems/ocaml-bls12-381/-/archive/610882867a34ccea8b3b2ee0a3aa88ac03852238/ocaml-bls12-381-610882867a34ccea8b3b2ee0a3aa88ac03852238.tar.bz2;
+      sha256 = "0giy7sqfcv20dk8r87wygz5ryj6yzkcvk8im38pz8pdm7c04ai3f";
     };
 
     useDune2 = true;
 
     propagatedBuildInputs = [
       ff
-      dune-configurator
+      ff-sig
+      tezos-rust-libs
       zarith
       ctypes
-      pkgs.rustc
-      pkgs.cargo
+    ];
+
+    buildInputs = [
+      dune-configurator
     ];
 
     inherit doCheck;
   };
 
+  bls12-381-unix = buildDunePackage {
+    pname = "bls12-381-unix";
+    inherit (bls12-381-gen) version external src useDune2;
+
+    propagatedBuildInputs = [
+      ff
+      zarith
+      ctypes
+      bls12-381
+      tezos-rust-libs
+    ];
+
+    buildInputs = [
+      dune-configurator
+    ];
+
+    OPAM_SWITCH_PREFIX = "${tezos-rust-libs}/lib/ocaml/${ocamlPackages.ocaml.version}/site-lib";
+
+    # TODO: Don't be so hacky
+    shellHook = ''
+      export OPAM_SWITCH_PREFIX="${tezos-rust-libs}/lib/ocaml/${ocamlPackages.ocaml.version}/site-lib"
+    '';
+
+    inherit doCheck;
+  };
+  */
+
+  tezos-rust-libs = buildDunePackage rec {
+    pname = "tezos-rust-libs";
+    version = "1.1-dev";
+    external = true;
+
+    src = builtins.fetchurl {
+      url = https://gitlab.com/tezos/tezos-rust-libs/-/archive/a7fbe55a1c20035140c8a8359f8732b624a9e4b2/tezos-rust-libs-a7fbe55a1c20035140c8a8359f8732b624a9e4b2.tar.bz2;
+      sha256 = "05c2bzdv1lr1s7ksazfzkwwm6xi61x05q41w4mp5a3xyx17hzxx6";
+    };
+
+    buildInputs = with ocamlPackages; [
+      topkg
+      findlib
+    ];
+
+    propagatedBuildInputs = [ pkgs.cargo pkgs.rustc ];
+
+    buildPhase = ''
+      cargo --version
+      rustc --version
+      # mkdir .cargo
+      # mv cargo-config .cargo/config
+      cargo build --target-dir target --release
+    '';
+
+    installPhase = ''
+      ${opaline}/bin/opaline -prefix $out -libdir $OCAMLFIND_DESTDIR/lib -name ${pname}
+    '';
+
+    meta = {
+      description = "Tezos: all rust dependencies and their dependencies";
+      license = lib.licenses.mit;
+    };
+
+    createFindlibDestdir = true;
+  };
 
   tezos-protocol-alpha = buildDunePackage {
     pname = "tezos-protocol-alpha";
@@ -1217,7 +1303,7 @@ rec {
 
     # TODO: Don't be so hacky
     shellHook = ''
-      export OPAM_SWITCH_PREFIX="${ocamlPackages.tezos-rust-libs}/lib/ocaml/4.10.2/site-lib"
+      export OPAM_SWITCH_PREFIX="${ocamlPackages.tezos-rust-libs}/lib/ocaml/${ocamlPackages.ocaml.version}/site-lib"
     '';
   };
 
@@ -1789,7 +1875,7 @@ rec {
       pyml-plot
       pkgs.autoconf
       hashcons
-      ocaml-migrate-parsetree-2-1
+      ocaml-migrate-parsetree-2
     ];
 
     inherit doCheck;

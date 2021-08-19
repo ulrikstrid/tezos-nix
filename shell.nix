@@ -10,6 +10,7 @@ let
       (drv:
         # we wanna filter our own packages so we don't build them when entering
         # the shell. They always have `pname`
+        (lib.hasAttr "external" drv && drv.external) ||
         !(lib.hasAttr "pname" drv) ||
         drv.pname == null ||
         !(lib.any (name: name == drv.pname || name == drv.name) (lib.attrNames tezosDrvs)))
@@ -27,7 +28,7 @@ with pkgs;
       })
       dream-serve
     ])) ++ (with ocamlPackages;
-    [ utop fswatch redemon ppx_let_locs ]);
+    [ utop fswatch redemon ppx_let_locs opam ]);
 }).overrideAttrs (o: {
   propagatedBuildInputs = filterDrvs o.propagatedBuildInputs;
   buildInputs = filterDrvs o.buildInputs;
