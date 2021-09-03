@@ -1,4 +1,4 @@
-{ pkgs, stdenv, lib, ocamlPackages, static ? false, opaline, doCheck }:
+{ pkgs, stdenv, lib, ocamlPackages, static ? false, fetchzip, opaline, doCheck }:
 
 with ocamlPackages;
 
@@ -727,16 +727,23 @@ rec {
     inherit doCheck;
   };
 
-/*
-  bls12-381 = buildDunePackage {
-    pname = "bls12-381";
-    inherit (bls12-381-gen) version external src useDune2;
+  bls12-381-gen = buildDunePackage {
+    pname = "bls12-381-gen";
+    version = "0.4.3";
+    external = true;
+
+    src = builtins.fetchurl {
+      url = https://gitlab.com/dannywillems/ocaml-bls12-381/-/archive/0.4.3-legacy/ocaml-bls12-381-0.4.3-legacy.tar.bz2;
+      sha256 = "1m9934swbp1pxfivm1j4szwkg1499aynrbb114zhd4pl7xhbw9j2";
+    };
+
+    useDune2 = true;
 
     propagatedBuildInputs = [
       ff
+      ff-sig
       zarith
       ctypes
-      bls12-381-gen
     ];
 
     buildInputs = [
@@ -746,22 +753,43 @@ rec {
     inherit doCheck;
   };
 
-  bls12-381-gen = buildDunePackage {
-    pname = "bls12-381-gen";
-    version = "0.5-dev";
+  bls12-381-legacy = buildDunePackage {
+    pname = "bls12-381-legacy";
+
+    inherit (bls12-381-gen) src version external useDune2;
+
+    propagatedBuildInputs = [
+      ff
+      zarith
+      ctypes
+      bls12-381-gen
+      tezos-rust-libs
+    ];
+
+    buildInputs = [
+      dune-configurator
+    ];
+
+    OPAM_SWITCH_PREFIX = "${ocamlPackages.tezos-rust-libs}/lib/ocaml/${ocaml.version}/site-lib";
+
+    inherit doCheck;
+  };
+
+  bls12-381 = buildDunePackage {
+    pname = "bls12-381";
+    version = "1.0.0-dev";
     external = true;
 
-    src = builtins.fetchurl {
-      url = https://gitlab.com/dannywillems/ocaml-bls12-381/-/archive/610882867a34ccea8b3b2ee0a3aa88ac03852238/ocaml-bls12-381-610882867a34ccea8b3b2ee0a3aa88ac03852238.tar.bz2;
-      sha256 = "0giy7sqfcv20dk8r87wygz5ryj6yzkcvk8im38pz8pdm7c04ai3f";
-    };
-
     useDune2 = true;
+
+    src = builtins.fetchurl {
+      url = https://gitlab.com/dannywillems/ocaml-bls12-381/-/archive/43db3c9c43de3c160461ad7075e8b19244d1cf40/ocaml-bls12-381-43db3c9c43de3c160461ad7075e8b19244d1cf40.tar.bz2;
+      sha256 = "1pxswvf9wlvfrn84mjr4j6lizx39ihzsy8hi71ys26fj7bmzmdms";
+    };
 
     propagatedBuildInputs = [
       ff
       ff-sig
-      tezos-rust-libs
       zarith
       ctypes
     ];
@@ -775,39 +803,30 @@ rec {
 
   bls12-381-unix = buildDunePackage {
     pname = "bls12-381-unix";
-    inherit (bls12-381-gen) version external src useDune2;
+    inherit (bls12-381) version external src useDune2;
 
     propagatedBuildInputs = [
-      ff
+      hex
       zarith
       ctypes
       bls12-381
-      tezos-rust-libs
     ];
 
     buildInputs = [
       dune-configurator
     ];
 
-    OPAM_SWITCH_PREFIX = "${tezos-rust-libs}/lib/ocaml/${ocamlPackages.ocaml.version}/site-lib";
-
-    # TODO: Don't be so hacky
-    shellHook = ''
-      export OPAM_SWITCH_PREFIX="${tezos-rust-libs}/lib/ocaml/${ocamlPackages.ocaml.version}/site-lib"
-    '';
-
     inherit doCheck;
   };
-  */
 
   tezos-rust-libs = buildDunePackage rec {
     pname = "tezos-rust-libs";
-    version = "1.1-dev";
+    version = "1.1";
     external = true;
 
-    src = builtins.fetchurl {
-      url = https://gitlab.com/tezos/tezos-rust-libs/-/archive/a7fbe55a1c20035140c8a8359f8732b624a9e4b2/tezos-rust-libs-a7fbe55a1c20035140c8a8359f8732b624a9e4b2.tar.bz2;
-      sha256 = "05c2bzdv1lr1s7ksazfzkwwm6xi61x05q41w4mp5a3xyx17hzxx6";
+    src = fetchzip {
+      url = https://gitlab.com/tezos/tezos-rust-libs/-/archive/v1.1/tezos-rust-libs-v1.1.zip;
+      sha256 = "08wpcq6cbdvxdhazcpqzz4pywagy3fdbys07q2anbk6lq45rc2w6";
     };
 
     buildInputs = with ocamlPackages; [
@@ -818,10 +837,8 @@ rec {
     propagatedBuildInputs = [ pkgs.cargo pkgs.rustc ];
 
     buildPhase = ''
-      cargo --version
-      rustc --version
-      # mkdir .cargo
-      # mv cargo-config .cargo/config
+      mkdir .cargo
+      mv cargo-config .cargo/config
       cargo build --target-dir target --release
     '';
 
@@ -914,7 +931,31 @@ rec {
     propagatedBuildInputs = [
       tezos-base
       tezos-protocol-environment
+      tezos-protocol-environment-sigs
+      tezos-protocol-environment-structs
       tezos-context
+    ];
+
+    inherit doCheck;
+  };
+
+  tezos-protocol-environment-structs = buildDunePackage {
+    pname = "tezos-protocol-environment-structs";
+    version = version;
+
+    src = lib.filterGitSource {
+      src = ./../src;
+      dirs = [ "lib_protocol_environment" ];
+    };
+
+    useDune2 = true;
+
+    propagatedBuildInputs = [
+      tezos-stdlib
+      tezos-crypto
+      tezos-protocol-environment-packer
+      bls12-381-legacy
+      data-encoding
     ];
 
     inherit doCheck;

@@ -1,6 +1,5 @@
-{ editor-mode ? false }:
+{ editor-mode ? false, pkgs ? import ./nix/sources.nix { } }:
 let
-  pkgs = import ./nix/sources.nix { };
   inherit (pkgs) lib;
   tezosPkgs = pkgs.recurseIntoAttrs (import ./nix { inherit pkgs; }).native;
   tezosDrvs = lib.filterAttrs (_: value: lib.isDerivation value) tezosPkgs;
